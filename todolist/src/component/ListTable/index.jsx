@@ -10,11 +10,10 @@ class ListTable extends Component {
     }
 
     render() {
-        const initArray = [...Array(this.props.listItems.length).keys()]
         return (
             <div>
                 {
-                    initArray.map(key => <ListItem key={key} value={this.props.listItems[key]} index={key} removeItem={this.removeItem} />)
+                    this.props.listItems.map((item, index) => <ListItem key={index} value={item} index={index} removeItem={this.removeItem} />)
                 }
             </div>
         )
