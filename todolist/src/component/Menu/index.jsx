@@ -6,7 +6,8 @@ class Menu extends React.Component {
         return (
             <div>
                 <Link to="/" style={{color: 'white'}}>All List Page</Link><span> | </span>
-                <Link to="/finished" style={{color: 'white'}}>Finished List Page</Link>
+                <Link to="/finished" style={{color: 'white'}}>Finished List Page</Link><span> | </span>
+                <Link to="/axios" style={{color: 'white'}}>Axios Page</Link>
             </div>
         )
     }
