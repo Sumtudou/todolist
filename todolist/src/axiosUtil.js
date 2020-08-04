@@ -25,8 +25,8 @@ export default {
                 errorCallBack(error)
             })
     },
-    axiosPUT: (id, postObject, successCallBack, errorCallBack) => {
-        axios.put('https://5e9ec500fb467500166c4658.mockapi.io/todos/' + id,postObject)
+    axiosPUT: (postObject, successCallBack, errorCallBack) => {
+        axios.put('https://5e9ec500fb467500166c4658.mockapi.io/todos/' + postObject.id,postObject)
             .then(function (response) {
                 successCallBack(response)
             })

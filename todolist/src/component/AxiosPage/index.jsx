@@ -23,7 +23,7 @@ class AxiosPage extends Component {
         }
         let item = {
             content: this.state.inputValue,
-            status: true
+            status: false
         }
         axiosUtil.axiosPOST(
             item,
@@ -55,6 +55,28 @@ class AxiosPage extends Component {
             }
         )
     }
+    changeMark = (index) =>{
+        this.state.ListItems.forEach(element => {
+            if(element.id === index){
+                element.status = !element.status
+                axiosUtil.axiosPUT(
+                    element,
+                    (response) => {
+                        console.log(response)
+                        axiosUtil.axiosGET(this)
+                    },
+                    (error) => {
+                        console.log('Error happened in PUT request', error);
+                        this.setState({
+                            error: error
+                        })
+                    }
+                )
+                //break
+            }
+            
+        });
+    }
 
 
 
@@ -73,6 +95,7 @@ class AxiosPage extends Component {
                             isMark={item.status}
                             index={item.id}
                             removeItem={this.removeItem}
+                            changeMark={this.changeMark}
                         />)
                 }
             </div>
