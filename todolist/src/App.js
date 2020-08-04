@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
-import AddList from './component/AddList'
-import ListTable from './component/ListTable'
+import AllListPage from './component/AllListPage'
+import FinishedListPage from './component/FinishedListTable'
+import { HashRouter, Route } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <AddList />
-        <ListTable />
+        <HashRouter>
+          <div>
+            <Route exact path='/' component={AllListPage} />
+            <Route path='/finished' component={FinishedListPage} />
+          </div>
+
+        </HashRouter>
       </header>
     </div>
   );

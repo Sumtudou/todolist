@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import { connect } from 'react-redux'
 
-class ListTable extends Component {
-
+class FinishedListTable extends Component {
     removeItem = (index) => {
         this.props.removeListItem(index)
     }
@@ -13,15 +12,21 @@ class ListTable extends Component {
     }
 
     render() {
+        let markedItems =[]
+        this.props.listItems.forEach((element, index) => {
+            element.index = index
+            markedItems.push(element) 
+        });
+        markedItems = markedItems.filter(item => item.isMark === true)
         return (
             <div>
                 {
-                    this.props.listItems.map((item, index) =>
+                    markedItems.map((item) =>
                         <ListItem
-                            key={index}
+                            key={item.index}
                             value={item.content}
                             isMark={item.isMark}
-                            index={index}
+                            index={item.index}
                             removeItem={this.removeItem}
                             changeMark={this.changeMark}
                         />)
@@ -33,7 +38,9 @@ class ListTable extends Component {
 }
 
 const mapStateToPorps = (state) => {
-    return { listItems: state.listItems }
+    return {
+        listItems: state.listItems
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -50,5 +57,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToPorps, mapDispatchToProps)(ListTable)
-
+export default connect(mapStateToPorps, mapDispatchToProps)(FinishedListTable)
