@@ -17,11 +17,15 @@ class AxiosPage extends Component {
     }
 
     onClick = () => {
+        if (this.state.inputValue.trim() === '') {
+            alert('Input Nothing!!')
+            return
+        }
         let item = {
             content: this.state.inputValue,
-            status : true
+            status: true
         }
-        axiosUtil.axiosPOST(this,
+        axiosUtil.axiosPOST(
             item,
             (response) => {
                 console.log(response)
@@ -36,6 +40,24 @@ class AxiosPage extends Component {
             })
     }
 
+    removeItem = (id) => {
+        axiosUtil.axiosDELETE(
+            id,
+            (response) => {
+                console.log(response)
+                axiosUtil.axiosGET(this)
+            },
+            (error) => {
+                console.log('Error happened in DELETE request', error);
+                this.setState({
+                    error: error
+                })
+            }
+        )
+    }
+
+
+
     render() {
         return (
             <div>
@@ -49,7 +71,8 @@ class AxiosPage extends Component {
                             key={item.id}
                             value={item.content}
                             isMark={item.status}
-                            index={parseInt(item.id)}
+                            index={item.id}
+                            removeItem={this.removeItem}
                         />)
                 }
             </div>

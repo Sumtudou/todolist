@@ -16,7 +16,7 @@ export default {
                 })
             })
     },
-    axiosPOST: (__this, postObject, successCallBack, errorCallBack) => {
+    axiosPOST: (postObject, successCallBack, errorCallBack) => {
         axios.post('https://5e9ec500fb467500166c4658.mockapi.io/todos', postObject)
             .then(function (response) {
                 successCallBack(response)
@@ -25,10 +25,23 @@ export default {
                 errorCallBack(error)
             })
     },
-    axiosPUT: () => {
-
+    axiosPUT: (id, postObject, successCallBack, errorCallBack) => {
+        axios.put('https://5e9ec500fb467500166c4658.mockapi.io/todos/' + id,postObject)
+            .then(function (response) {
+                successCallBack(response)
+            })
+            .catch(function (error) {
+                errorCallBack(error)
+            })
     },
-    axiosDELETE: () => {
+    axiosDELETE: (id, successCallBack, errorCallBack) => {
+        axios.delete('https://5e9ec500fb467500166c4658.mockapi.io/todos/' + id)
+            .then(function (response) {
+                successCallBack(response)
+            })
+            .catch(function (error) {
+                errorCallBack(error)
+            })
 
     }
 }
