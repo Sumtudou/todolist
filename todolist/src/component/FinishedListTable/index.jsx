@@ -39,6 +39,13 @@ class FinishedListTable extends Component {
             </div>
         )
     }
+    componentDidMount() {
+        axiosUtil.getAllTodoItems((response) => {
+            this.setState({
+                ListItems: response.data
+            });
+        })
+    }
 
 }
 
