@@ -5,13 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import store from './store'
+import { Spin } from 'antd'
+
+console.log(store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <Spin spinning={store.getState().loading.loading}></Spin>
       <App />
     </Provider>
-
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import axiosUtil from '../../axiosUtil'
-import { Row, Col,Input, Button } from 'antd';
+import { Row, Col, Input, Button } from 'antd';
 class AxiosPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
             inputValue: '',
             ListItems: [],
-            error: ''
+            error: '',
+            loading: false
         }
     }
 
@@ -117,9 +118,13 @@ class AxiosPage extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            loading: true
+        })
         axiosUtil.getAllTodoItems((response) => {
             this.setState({
-                ListItems: response.data
+                ListItems: response.data,
+                loading: false
             });
         })
     }

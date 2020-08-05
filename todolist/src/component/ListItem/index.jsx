@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { CloseCircleTwoTone } from '@ant-design/icons'
+import { Row, Col, Button } from 'antd';
 
 class ListItem extends Component {
 
@@ -11,17 +13,19 @@ class ListItem extends Component {
 
     render() {
         return (
-            <div>
-                <span>
+            <Row>
+                <Col span={21} offset={1}>
                     <label
                         style={{ textDecorationLine: this.props.isMark ? 'line-through' : 'none' }}
                         onClick={this.changeMark}
                     >
                         {this.props.value}
                     </label>
-                    <button onClick={this.deleteItem}> X </button>
-                </span>
-            </div>
+                </Col>
+                <Col span={1}>
+                    <Button shape="circle" onClick={this.deleteItem}><CloseCircleTwoTone /></Button>
+                </Col>
+            </Row>
         )
     }
 

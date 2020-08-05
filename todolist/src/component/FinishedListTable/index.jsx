@@ -30,7 +30,7 @@ class FinishedListTable extends Component {
                 size="large"
                 bordered
                 dataSource={markedItems}
-                renderItem={item => <List.Item>
+                renderItem={item => <List.Item bordered split>
                     <ListItem
                         key={item.index}
                         value={item.content}
@@ -48,6 +48,8 @@ class FinishedListTable extends Component {
             this.setState({
                 ListItems: response.data
             });
+        }, (error) => {
+            console.log(error);
         })
     }
 
@@ -55,7 +57,7 @@ class FinishedListTable extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        listItems: state.listItems
+        listItems: state.todoList.listItems
     }
 }
 

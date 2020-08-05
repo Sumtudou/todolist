@@ -16,11 +16,12 @@ class ListTable extends Component {
     render() {
         this.props.listItems.map((item, index) => item.index = index)
         return (
-            <List
+            <div>
+                <List
                 size="large"
                 bordered
                 dataSource={this.props.listItems}
-                renderItem={item => <List.Item>
+                renderItem={item => <List.Item bordered>
                     <ListItem
                         key={item.index}
                         value={item.content}
@@ -31,13 +32,15 @@ class ListTable extends Component {
                     />
                 </List.Item>}
             />
+            </div>
+            
         )
     }
 
 }
 
 const mapStateToPorps = (state) => {
-    return { listItems: state.listItems }
+    return { listItems: state.todoList.listItems }
 }
 
 const mapDispatchToProps = (dispatch) => {

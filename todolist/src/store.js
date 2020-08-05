@@ -1,5 +1,6 @@
-import { createStore } from 'redux'
-import reducer from './reducer';
+import { createStore, combineReducers } from 'redux'
+import todoList from './reducer/todoList';
+import loading from './reducer/loading'
 
-const store = createStore(reducer)
+const store = createStore(combineReducers({todoList, loading}))
 export default store
