@@ -30,7 +30,9 @@ class AxiosPage extends Component {
             (response) => {
                 console.log(response)
                 axiosUtil.axiosGET(this)
-                this.state.inputValue = ''
+                this.setState({
+                    inputValue :''
+                })
             },
             (error) => {
                 console.log('Error happened in POST request', error);
@@ -55,27 +57,22 @@ class AxiosPage extends Component {
             }
         )
     }
-    changeMark = (index) =>{
-        this.state.ListItems.forEach(element => {
-            if(element.id === index){
-                element.status = !element.status
-                axiosUtil.axiosPUT(
-                    element,
-                    (response) => {
-                        console.log(response)
-                        axiosUtil.axiosGET(this)
-                    },
-                    (error) => {
-                        console.log('Error happened in PUT request', error);
-                        this.setState({
-                            error: error
-                        })
-                    }
-                )
-                //break
+    changeMark = (index) => {
+        let item = this.state.ListItems.find((element) => element.id === index)
+        item.status = !item.status
+        axiosUtil.axiosPUT(
+            item,
+            (response) => {
+                console.log(response)
+                axiosUtil.axiosGET(this)
+            },
+            (error) => {
+                console.log('Error happened in PUT request', error);
+                this.setState({
+                    error: error
+                })
             }
-            
-        });
+        )
     }
 
 
