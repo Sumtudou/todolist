@@ -2,41 +2,45 @@ import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import { connect } from 'react-redux'
 import axiosUtil from '../../axiosUtil'
+import { List } from 'antd';
+
 class FinishedListTable extends Component {
     removeItem = (index) => {
-        axiosUtil.deleteTodoItem(this.props.listItems[index].id,(response) => {}, (error) => {})
+        axiosUtil.deleteTodoItem(this.props.listItems[index].id, (response) => { }, (error) => { })
         this.props.removeListItem(index)
     }
 
     changeMark = (index) => {
         let item = this.props.listItems[index]
-        axiosUtil.updateTodoItem({...item, status: !item.status}, (response) => {
-            console.log("a  ",response);
+        axiosUtil.updateTodoItem({ ...item, status: !item.status }, (response) => {
+            console.log("a  ", response);
             this.props.changeItemMark(index)
-        }, (error) => {})
+        }, (error) => { })
     }
 
     render() {
-        let markedItems =[]
+        let markedItems = []
         this.props.listItems.forEach((element, index) => {
             element.index = index
-            markedItems.push(element) 
+            markedItems.push(element)
         });
         markedItems = markedItems.filter(item => item.status === true)
         return (
-            <div>
-                {
-                    markedItems.map((item) =>
-                        <ListItem
-                            key={item.index}
-                            value={item.content}
-                            isMark={item.status}
-                            index={item.index}
-                            removeItem={this.removeItem}
-                            changeMark={this.changeMark}
-                        />)
-                }
-            </div>
+            <List
+                size="large"
+                bordered
+                dataSource={markedItems}
+                renderItem={item => <List.Item>
+                    <ListItem
+                        key={item.index}
+                        value={item.content}
+                        isMark={item.status}
+                        index={item.index}
+                        removeItem={this.removeItem}
+                        changeMark={this.changeMark}
+                    />
+                </List.Item>}
+            />
         )
     }
     componentDidMount() {

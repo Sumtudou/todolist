@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import axiosUtil from '../../axiosUtil'
-
+import { Row, Col,Input, Button } from 'antd';
 class AxiosPage extends Component {
     constructor(props) {
         super(props)
@@ -93,10 +93,14 @@ class AxiosPage extends Component {
     render() {
         return (
             <div>
-                <span>
-                    <input type="text" value={this.state.inputValue} onChange={this.handleChange} />
-                    <button onClick={this.onClick}>Add</button>
-                </span>
+                <Row>
+                    <Col span={7} offset={8}>
+                        <Input placeholder="Basic usage" value={this.state.inputValue} onChange={this.handleChange} />
+                    </Col>
+                    <Col span={1}>
+                        <Button type="primary" onClick={this.onClick} block>Add</Button>
+                    </Col>
+                </Row>
                 {
                     this.state.ListItems.map((item) =>
                         <ListItem

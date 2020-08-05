@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import { connect } from 'react-redux'
+import { List } from 'antd';
 
 class ListTable extends Component {
 
@@ -13,20 +14,23 @@ class ListTable extends Component {
     }
 
     render() {
+        this.props.listItems.map((item, index) => item.index = index)
         return (
-            <div>
-                {
-                    this.props.listItems.map((item, index) =>
-                        <ListItem
-                            key={index}
-                            value={item.content}
-                            isMark={item.status}
-                            index={index}
-                            removeItem={this.removeItem}
-                            changeMark={this.changeMark}
-                        />)
-                }
-            </div>
+            <List
+                size="large"
+                bordered
+                dataSource={this.props.listItems}
+                renderItem={item => <List.Item>
+                    <ListItem
+                        key={item.index}
+                        value={item.content}
+                        isMark={item.status}
+                        index={item.index}
+                        removeItem={this.removeItem}
+                        changeMark={this.changeMark}
+                    />
+                </List.Item>}
+            />
         )
     }
 

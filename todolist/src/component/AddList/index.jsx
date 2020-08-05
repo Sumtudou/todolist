@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Row, Col,Input, Button } from 'antd';
 
 class AddList extends Component {
 
@@ -11,8 +12,8 @@ class AddList extends Component {
     }
 
     handleChange = (event) => {
-        this.setState({inputValue: event.target.value});
-      }
+        this.setState({ inputValue: event.target.value });
+    }
 
     onClick = () => {
         console.log(this.state.inputValue);
@@ -21,28 +22,30 @@ class AddList extends Component {
             return
         }
         this.props.addListItem(this.state.inputValue);
-        this.setState({inputValue: ''})
+        this.setState({ inputValue: '' })
     }
 
     render() {
         return (
-            <div>
-                <span>
-                    <input type="text" value={this.state.inputValue} onChange={this.handleChange}/>
-                    <button onClick={this.onClick}>Add</button>
-                </span>
-            </div>
+            <Row>
+                <Col span={7} offset={8}>
+                    <Input placeholder="Basic usage" value={this.state.inputValue} onChange={this.handleChange} />
+                </Col>
+                <Col span={1}>
+                    <Button type="primary" onClick={this.onClick} block>Add</Button>
+                </Col>
+            </Row>
         )
     }
 
 }
 const mapDispatchToProps = (dispatch) => {
-    return { 
-        addListItem : (value) => dispatch({
+    return {
+        addListItem: (value) => dispatch({
             type: 'ADD',
-            inputValue:value
+            inputValue: value
         })
     }
 }
 
-export default connect(null,mapDispatchToProps)(AddList)
+export default connect(null, mapDispatchToProps)(AddList)
