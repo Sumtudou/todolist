@@ -25,13 +25,17 @@ class AxiosPage extends Component {
             content: this.state.inputValue,
             status: false
         }
-        axiosUtil.axiosPOST(
+        axiosUtil.addNewTodoItem(
             item,
             (response) => {
                 console.log(response)
-                axiosUtil.axiosGET(this)
+                axiosUtil.getAllTodoItems((response) => {
+                    this.setState({
+                        ListItems: response.data
+                    });
+                }, (error) => { })
                 this.setState({
-                    inputValue :''
+                    inputValue: ''
                 })
             },
             (error) => {
@@ -43,11 +47,15 @@ class AxiosPage extends Component {
     }
 
     removeItem = (id) => {
-        axiosUtil.axiosDELETE(
+        axiosUtil.deleteTodoItem(
             id,
             (response) => {
                 console.log(response)
-                axiosUtil.axiosGET(this)
+                axiosUtil.getAllTodoItems((response) => {
+                    this.setState({
+                        ListItems: response.data
+                    });
+                }, (error) => { })
             },
             (error) => {
                 console.log('Error happened in DELETE request', error);
@@ -60,11 +68,16 @@ class AxiosPage extends Component {
     changeMark = (index) => {
         let item = this.state.ListItems.find((element) => element.id === index)
         item.status = !item.status
-        axiosUtil.axiosPUT(
+        axiosUtil.updateTodoItem(
             item,
             (response) => {
                 console.log(response)
-                axiosUtil.axiosGET(this)
+
+                axiosUtil.getAllTodoItems((response) => {
+                    this.setState({
+                        ListItems: response.data
+                    });
+                }, (error) => { })
             },
             (error) => {
                 console.log('Error happened in PUT request', error);
@@ -100,7 +113,11 @@ class AxiosPage extends Component {
     }
 
     componentDidMount() {
-        axiosUtil.axiosGET(this)
+        axiosUtil.getAllTodoItems((response) => {
+            this.setState({
+                ListItems: response.data
+            });
+        })
     }
 
 }

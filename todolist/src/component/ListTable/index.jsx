@@ -20,7 +20,7 @@ class ListTable extends Component {
                         <ListItem
                             key={index}
                             value={item.content}
-                            isMark={item.isMark}
+                            isMark={item.status}
                             index={index}
                             removeItem={this.removeItem}
                             changeMark={this.changeMark}

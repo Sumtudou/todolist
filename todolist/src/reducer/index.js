@@ -9,7 +9,7 @@ export default (state = payload, action) => {
             console.log('ADD');
             const item = {
                 content: action.inputValue,
-                isMark: false
+                status: false
             }
             return {
                 listItems: [...state.listItems, item]
@@ -23,11 +23,21 @@ export default (state = payload, action) => {
             }
         }
         case 'MARK': {
-            state.listItems[action.index].isMark = !state.listItems[action.index].isMark
+            console.log('MARK ' + action.index);
+            console.log('MARK ' + state.listItems[action.index].status);
+            state.listItems[action.index].status = !state.listItems[action.index].status
+            console.log('MARK ' + state.listItems[action.index].status);
             return {
                 listItems: [...state.listItems]
             }
         }
+        case 'SYNC': {
+            console.log('action.listItems', action.listItems);
+            return {
+                listItems: [...action.listItems]
+            }
+        }
+
         default:
             return state;
     }

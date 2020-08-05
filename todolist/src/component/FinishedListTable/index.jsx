@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import { connect } from 'react-redux'
-
+import axiosUtil from '../../axiosUtil'
 class FinishedListTable extends Component {
     removeItem = (index) => {
+        axiosUtil.deleteTodoItem(this.props.listItems[index].id,(response) => {}, (error) => {})
         this.props.removeListItem(index)
     }
 
     changeMark = (index) => {
-        this.props.changeItemMark(index)
+        let item = this.props.listItems[index]
+        axiosUtil.updateTodoItem({...item, status: !item.status}, (response) => {
+            console.log("a  ",response);
+            this.props.changeItemMark(index)
+        }, (error) => {})
     }
 
     render() {
@@ -17,7 +22,7 @@ class FinishedListTable extends Component {
             element.index = index
             markedItems.push(element) 
         });
-        markedItems = markedItems.filter(item => item.isMark === true)
+        markedItems = markedItems.filter(item => item.status === true)
         return (
             <div>
                 {
@@ -25,7 +30,7 @@ class FinishedListTable extends Component {
                         <ListItem
                             key={item.index}
                             value={item.content}
-                            isMark={item.isMark}
+                            isMark={item.status}
                             index={item.index}
                             removeItem={this.removeItem}
                             changeMark={this.changeMark}
@@ -37,7 +42,7 @@ class FinishedListTable extends Component {
 
 }
 
-const mapStateToPorps = (state) => {
+const mapStateToProps = (state) => {
     return {
         listItems: state.listItems
     }
@@ -57,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToPorps, mapDispatchToProps)(FinishedListTable)
+export default connect(mapStateToProps, mapDispatchToProps)(FinishedListTable)
