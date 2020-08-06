@@ -6,14 +6,17 @@ import { HashRouter, Route } from 'react-router-dom'
 import RouterMenu from './component/RouterMenu'
 import AxiosPage from './component/AxiosPage'
 import 'antd/dist/antd.css'
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
+import { connect } from 'react-redux';
 
 const { Header, Content, Footer } = Layout;
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
+    <div className="App"><Spin spinning={props.loading}>
+
       <Layout>
+
         <HashRouter>
           <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <RouterMenu />
@@ -28,9 +31,15 @@ function App() {
           </Content>
         </HashRouter>
         <Footer style={{ textAlign: 'center' }}>©2020 Created by Jim&Jay</Footer>
-      </Layout>
+      </Layout></Spin>
     </div>
   );
 }
 
-export default App;
+const mapStateToPorps = (state) => {
+  return { loading: state.loading.loading }
+}
+
+export default connect(mapStateToPorps)(App)
+
+

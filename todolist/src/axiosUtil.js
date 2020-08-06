@@ -35,7 +35,7 @@ export default {
             })
     },
     deleteTodoItem: (id, successCallBack, errorCallBack) => {
-        todoApi.delete(BASE_URL + id)
+        todoApi.delete(`${BASE_URL}/${id}`)
             .then(function (response) {
                 successCallBack(response)
             })
@@ -45,12 +45,15 @@ export default {
     }
 }
 
-// todoApi.interceptors.request.use(req => {
-//     store.dispatch({type: 'CHANGE'})
-//     return req
-// })
+todoApi.interceptors.request.use(req => {
+    store.dispatch({type: 'CHANGE'})
+    console.log("request");
+    return req
+})
 
-// todoApi.interceptors.response.use(req => {
-//     store.dispatch({type: 'CHANGE'})
-//     return req
-// })
+todoApi.interceptors.response.use(req => {
+    store.dispatch({type: 'CHANGE'})
+    console.log("response");
+
+    return req
+})

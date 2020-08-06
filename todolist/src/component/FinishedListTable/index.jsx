@@ -29,7 +29,7 @@ class FinishedListTable extends Component {
             <List
                 size="large"
                 bordered
-                dataSource={markedItems}
+                dataSource={markedItems}  //TODO input item replace ....
                 renderItem={item => <List.Item bordered split>
                     <ListItem
                         key={item.index}

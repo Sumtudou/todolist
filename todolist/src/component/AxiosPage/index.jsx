@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem'
 import axiosUtil from '../../axiosUtil'
-import { Row, Col, Input, Button } from 'antd';
+import { Row, Col, Input, Button, List } from 'antd';
 class AxiosPage extends Component {
     constructor(props) {
         super(props)
@@ -102,8 +102,11 @@ class AxiosPage extends Component {
                         <Button type="primary" onClick={this.onClick} block>Add</Button>
                     </Col>
                 </Row>
-                {
-                    this.state.ListItems.map((item) =>
+                <List
+                    size="large"
+                    bordered
+                    dataSource={this.state.ListItems}
+                    renderItem={item => <List.Item bordered>
                         <ListItem
                             key={item.id}
                             value={item.content}
@@ -111,21 +114,33 @@ class AxiosPage extends Component {
                             index={item.id}
                             removeItem={this.removeItem}
                             changeMark={this.changeMark}
-                        />)
-                }
+                        />
+                    </List.Item>}
+                    />
+                    {/* // {
+                    // this.state.ListItems.map((item) =>
+                    //     <ListItem
+                    //         key={item.id}
+                    //         value={item.content}
+                    //         isMark={item.status}
+                    //         index={item.id}
+                    //         removeItem={this.removeItem}
+                    //         changeMark={this.changeMark}
+                    //     />)
+                    // } */}
             </div>
         )
     }
 
     componentDidMount() {
-        this.setState({
-            loading: true
-        })
+                    this.setState({
+                        loading: true
+                    })
         axiosUtil.getAllTodoItems((response) => {
-            this.setState({
-                ListItems: response.data,
-                loading: false
-            });
+                    this.setState({
+                        ListItems: response.data,
+                        loading: false
+                    });
         })
     }
 

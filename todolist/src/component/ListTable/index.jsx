@@ -18,22 +18,22 @@ class ListTable extends Component {
         return (
             <div>
                 <List
-                size="large"
-                bordered
-                dataSource={this.props.listItems}
-                renderItem={item => <List.Item bordered>
-                    <ListItem
-                        key={item.index}
-                        value={item.content}
-                        isMark={item.status}
-                        index={item.index}
-                        removeItem={this.removeItem}
-                        changeMark={this.changeMark}
-                    />
-                </List.Item>}
-            />
+                    size="large"
+                    bordered
+                    dataSource={this.props.listItems}
+                    renderItem={item => <List.Item bordered>
+                        <ListItem
+                            key={item.index}
+                            value={item.content}
+                            isMark={item.status}
+                            index={item.index}
+                            removeItem={this.removeItem}
+                            changeMark={this.changeMark}
+                        />
+                    </List.Item>}
+                />
             </div>
-            
+
         )
     }
 

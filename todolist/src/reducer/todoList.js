@@ -32,7 +32,6 @@ export default (state = payload, action) => {
             }
         }
         case 'SYNC': {
-            console.log('action.listItems', action.listItems);
             return {
                 listItems: [...action.listItems]
             }

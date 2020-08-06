@@ -14,7 +14,7 @@ class ListItem extends Component {
     render() {
         return (
             <Row>
-                <Col span={21} offset={1}>
+                <Col span={14} offset={5}>
                     <label
                         style={{ textDecorationLine: this.props.isMark ? 'line-through' : 'none' }}
                         onClick={this.changeMark}

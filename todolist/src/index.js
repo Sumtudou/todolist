@@ -7,13 +7,14 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { Spin } from 'antd'
 
-console.log(store.getState());
+console.log(store.getState().loading.loading);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Spin spinning={store.getState().loading.loading}></Spin>
-      <App />
+      <Spin spinning={store.getState().loading.loading}>
+        <App />
+      </Spin>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
